@@ -1,0 +1,12 @@
+- name: check vim is exist
+  shell: which vi
+  failed_when: False
+  register: result
+
+- debug: var=result
+
+- name: If not installed --> install vi
+  yum:
+    name: vim-minimal
+    state: present
+  when: result.stdout_lines | length >= 1

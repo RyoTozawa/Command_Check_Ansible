@@ -1,0 +1,12 @@
+- name: check dig is exist
+  shell: which dig
+  failed_when: False
+  register: result
+
+- debug: var=result
+
+- name: If not installed --> install dig
+  yum:
+    name: bind-utils # dig
+    state: present
+  when: result.stdout_lines | length >= 1

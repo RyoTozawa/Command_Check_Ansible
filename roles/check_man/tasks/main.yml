@@ -1,0 +1,20 @@
+- name: do man command
+  shell: which man
+  failed_when: False
+  register: result
+
+- debug: var=result
+
+- name: if not installed --> install man
+  yum:
+    name: man
+    state: present
+  when:
+    - result.stdout_lines | length >= 1
+
+- name: if not installed --> install man-page
+  yum:
+    name: man-pages.noarch
+    state: present
+  when:
+    - result.stdout_lines | length >= 1

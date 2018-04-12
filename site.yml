@@ -1,0 +1,10 @@
+- hosts: all
+  become: true
+  user: vagrant
+  roles:
+    #- uninstall_xorg-x11
+    - check_man
+    - check_vi
+    - check_dig
+    - check_traceroute
+    - check_nslookup

@@ -1,0 +1,12 @@
+- name: check traceroute is exist
+  shell: which traceroute
+  failed_when: False
+  register: result
+
+- debug: var=result
+
+- name: if not installed --> install traceroute
+  yum:
+    name: bind-utils
+    state: present
+  when: result.stdout_lines | length >= 1
